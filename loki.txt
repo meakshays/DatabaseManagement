@@ -1,0 +1,98 @@
+i="y"
+
+while [ $i = "y" ]
+do
+echo "1.Find the factorial of a number."
+echo "2.Find a prime number."
+echo "3.Find the greatest of the 3 numbers."
+echo "4.Find if a number is palindrome."
+echo "5.Find if a string is palindrome."
+echo "Enter your choice"
+read ch
+case $ch in
+1) echo 'Enter a number'
+read num
+
+fact=1
+while [ $num -gt 1 ]
+do
+ fact=$((fact * num))
+ num=$((num - 1))
+done
+
+echo 'The factorial is:'
+echo $fact ;;
+2) echo 'Enter a number'
+read n
+for((j=2; j<=$n/2; j++))
+do
+  ans=$(( n%j ))
+  if [ $ans -eq 0 ]
+  then
+	echo "It is not a prime number."
+	exit 0
+  fi
+done
+echo "It is a prime number.";;
+
+3) echo "Enter Num1"
+read num1
+echo "Enter Num2"
+read num2
+echo "Enter Num3"
+read num3
+
+echo 'The greatest of the three numbers is:'
+
+if [ $num1 -gt $num2 ] && [ $num1 -gt $num3 ]
+then
+	echo $num1
+elif [ $num2 -gt $num1 ] && [ $num2 -gt $num3 ]
+then
+	echo $num2
+else
+	echo $num3
+fi;;
+4) echo 'Enter a number'
+read num
+s=0
+rev=""
+temp=$num
+   
+while [ $num -gt 0 ]
+do
+	s=$(( $num % 10 ))  
+	num=$(( $num / 10 ))
+	rev=$( echo ${rev}${s} )
+done
+   
+if [ $temp -eq $rev ];
+then
+	echo "Number is palindrome"
+else
+	echo "Number is NOT palindrome"
+fi;;
+5) echo "Enter a String"
+read input
+reverse=""
+
+len=${#input}
+for (( i=$len-1; i>=0; i-- ))
+do
+    reverse="$reverse${input:$i:1}"
+done
+if [ $input == $reverse ]
+then
+	echo "$input is a palindrome"
+else
+	echo "$input is not a palindrome"
+fi;;
+*)echo "Invalid choice";;
+esac
+echo "Do u want to continue ?"
+read i
+if [ $i != "y" ]
+then
+exit
+fi
+done
